@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>AXGEN SOLAR – Chấm công</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1D2B27">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Chấm công AXGEN">
+<meta name="mobile-web-app-capable" content="yes">
+<style>
+  :root { --nen:#1D2B27; --cam:#FA961E; --cam2:#E8820C; --xanh:#1C7F6C; --xam:#F1F3F2; --chu:#1f2937; --nhat:#6b7280; --do:#B91C1C; }
+  * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { margin:0; font-family:Roboto, Arial, sans-serif; background:#F5F6F5; color:var(--chu); font-size:15px; }
+  header { background:var(--nen); color:#fff; padding:14px 16px 16px; }
+  .logo { font-weight:700; letter-spacing:1.5px; font-size:17px; }
+  .slogan { color:var(--cam); font-size:11px; font-weight:600; letter-spacing:.5px; margin-top:2px; }
+  .ten { margin-top:10px; font-size:19px; font-weight:700; }
+  .ngay { color:#cfd8d4; font-size:13px; margin-top:2px; }
+  .gio { font-size:34px; font-weight:700; margin-top:6px; font-variant-numeric:tabular-nums; }
+  main { padding:12px 12px 40px; max-width:520px; margin:0 auto; }
+  .the { background:#fff; border-radius:14px; padding:14px; margin-bottom:12px; box-shadow:0 1px 3px rgba(0,0,0,.06); }
+  .the h3 { margin:0 0 8px; font-size:14px; color:var(--nen); text-transform:uppercase; letter-spacing:.4px; }
+  .nut { display:block; width:100%; border:0; border-radius:14px; padding:18px; font-size:22px; font-weight:700; color:#fff; background:var(--cam); letter-spacing:1px; }
+  .nut.ra { background:var(--xanh); }
+  .nut:disabled { opacity:.5; }
+  .nut2 { flex:1; border:1.5px solid var(--nen); background:#fff; color:var(--nen); border-radius:12px; padding:12px 6px; font-size:14px; font-weight:600; }
+  .hang { display:flex; gap:8px; }
+  .luot { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #eee; font-size:14px; }
+  .luot:last-child { border-bottom:0; }
+  .nho { color:var(--nhat); font-size:12.5px; }
+  .so { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; text-align:center; }
+  .so div { background:var(--xam); border-radius:10px; padding:8px 4px; }
+  .so b { display:block; font-size:20px; color:var(--nen); }
+  .so span { font-size:11.5px; color:var(--nhat); }
+  .canh { background:#FFF4D6; border-left:4px solid var(--cam); padding:10px 12px; border-radius:8px; margin-bottom:10px; font-size:13.5px; }
+  .loi { background:#FDE2E1; border-left:4px solid var(--do); padding:10px 12px; border-radius:8px; margin-bottom:10px; font-size:14px; }
+  .ok { background:#E3F4EC; border-left:4px solid var(--xanh); padding:10px 12px; border-radius:8px; margin-bottom:10px; font-size:14px; }
+  .don { padding:8px 0; border-bottom:1px solid #eee; font-size:13.5px; }
+  .don:last-child { border-bottom:0; }
+  .tt { display:inline-block; padding:1px 8px; border-radius:10px; font-size:11.5px; font-weight:600; }
+  .tt.cho { background:#FFF4D6; color:#92400E; } .tt.duyet { background:#E3F4EC; color:#065F46; } .tt.khong { background:#FDE2E1; color:#991B1B; } .tt.huy { background:#eee; color:#555; }
+  .lop { position:fixed; inset:0; background:rgba(0,0,0,.45); display:none; align-items:flex-end; justify-content:center; z-index:9; }
+  .lop.mo { display:flex; }
+  .hop { background:#fff; width:100%; max-width:520px; border-radius:18px 18px 0 0; padding:16px; max-height:92vh; overflow:auto; }
+  .hop h2 { margin:0 0 10px; font-size:18px; color:var(--nen); }
+  label { display:block; font-size:13px; font-weight:600; margin:10px 0 4px; }
+  input, select, textarea { width:100%; padding:11px; border:1px solid #cfd4d2; border-radius:10px; font-size:16px; font-family:inherit; background:#fff; }
+  textarea { min-height:70px; }
+  .anh { width:120px; height:120px; object-fit:cover; border-radius:12px; display:block; margin:0 auto 8px; background:#eee; }
+  .vitri { text-align:center; font-size:14px; margin:6px 0 4px; }
+  .an { display:none !important; }
+  .chan { text-align:center; color:var(--nhat); font-size:11.5px; margin-top:18px; line-height:1.5; }
+  a.link { color:var(--xanh); font-weight:600; text-decoration:none; }
+  .huy { border:0; background:none; color:var(--do); font-size:12.5px; font-weight:600; padding:0; margin-left:6px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">AXGEN SOLAR</div>
+  <div class="slogan">CHUYÊN GIA ĐIỆN MẶT TRỜI · CHẤM CÔNG</div>
+  <div class="ten" id="ten">Đang tải…</div>
+  <div class="ngay" id="ngay"></div>
+  <div class="gio" id="dongho">--:--</div>
+</header>
+<main>
+  <div id="thongbao"></div>
+  <div id="noidung" class="an">
+    <div id="canhbao"></div>
+    <div class="the">
+      <button class="nut" id="nutCham" onclick="batDauCham()">VÀO CA</button>
+      <div class="nho" style="text-align:center;margin-top:8px" id="gioLam"></div>
+      <div id="luotHom" style="margin-top:8px"></div>
+    </div>
+    <div class="the">
+      <h3>Quỹ nghỉ của bạn</h3>
+      <div class="so">
+        <div><b id="qPhep">0</b><span>Phép năm còn</span></div>
+        <div><b id="qBu">0</b><span>Nghỉ bù OT còn</span></div>
+        <div><b id="qSap">0</b><span>Đã duyệt sắp nghỉ</span></div>
+      </div>
+      <div class="nho" id="qHan" style="margin-top:8px"></div>
+    </div>
+    <div class="the">
+      <h3 id="thTen">Tháng này</h3>
+      <div class="so">
+        <div><b id="tCong">0</b><span>Công thực tế</span></div>
+        <div><b id="tHL">0</b><span>Công hưởng lương</span></div>
+        <div><b id="tTre">0</b><span>Lần đi trễ</span></div>
+      </div>
+      <div class="nho" id="tThem" style="margin-top:8px"></div>
+    </div>
+    <div class="hang" style="margin-bottom:12px">
+      <button class="nut2" onclick="moDon('nghi')">Xin nghỉ</button>
+      <button class="nut2" onclick="moDon('ot')">Đăng ký OT</button>
+      <button class="nut2" onclick="moDon('bs')">Bổ sung công</button>
+    </div>
+    <div class="the">
+      <h3>Đơn của bạn</h3>
+      <div id="dsDon" class="nho">Chưa có đơn.</div>
+    </div>
+    <div class="chan">Giờ chấm lấy theo máy chủ Google, không theo đồng hồ điện thoại.<br>Ảnh và vị trí chỉ dùng xác nhận chấm công · chỉ Giám đốc và chị Quyên xem.<br>Cần hỗ trợ: anh Vũ 0902 974 696 · bản 1.3</div>
+  </div>
+</main>
+
+<input type="file" id="mayAnh" accept="image/*" capture="user" class="an" onchange="coAnh(this)">
+
+<!-- Đồng ý dữ liệu -->
+<div class="lop" id="lopDongY">
+  <div class="hop">
+    <h2>Trước khi chấm công</h2>
+    <p style="font-size:14.5px;line-height:1.55">Mỗi lần chấm, hệ thống ghi <b>giờ</b>, <b>vị trí GPS</b> và <b>1 ảnh mặt</b> của bạn để xác nhận chấm công, tính ngày công, phép và OT. Dữ liệu chỉ anh Vũ và chị Quyên xem, không dùng cho mục đích khác.</p>
+    <p style="font-size:14px">Điện thoại sẽ hỏi quyền <b>Vị trí</b> và <b>Máy ảnh</b> – chọn <b>Cho phép</b>.</p>
+    <button class="nut" onclick="dongY()">TÔI ĐỒNG Ý</button>
+  </div>
+</div>
+
+<!-- Xác nhận chấm -->
+<div class="lop" id="lopCham">
+  <div class="hop">
+    <h2 id="chamTieuDe">Vào ca</h2>
+    <img id="anhXem" class="anh" alt="">
+    <div class="vitri" id="viTri">Đang lấy vị trí…</div>
+    <div id="khungNgoai" class="an">
+      <label>Bạn đang làm việc ở đâu? (bắt buộc khi ngoài văn phòng)</label>
+      <input id="noiLam" placeholder="VD: AXG-2611-0123 khảo sát nhà anh Tâm, Gò Vấp">
+    </div>
+    <label>Ghi chú (không bắt buộc)</label>
+    <input id="ghiChu" placeholder="">
+    <div style="height:12px"></div>
+    <button class="nut" id="nutGui" onclick="guiCham()" disabled>XÁC NHẬN</button>
+    <div style="height:8px"></div>
+    <button class="nut2" style="width:100%" onclick="dong('lopCham')">Hủy</button>
+  </div>
+</div>
+
+<!-- Đơn -->
+<div class="lop" id="lopDon">
+  <div class="hop">
+    <h2 id="donTieuDe">Xin nghỉ</h2>
+    <div id="fNghi">
+      <label>Loại nghỉ</label>
+      <select id="dLoai">
+        <option>Nghỉ phép</option>
+        <option>Nghỉ không lương</option>
+        <option>Nghỉ việc riêng có lương</option>
+        <option>Nghỉ ốm / chế độ BHXH</option>
+      </select>
+      <div class="nho" id="dLoaiGhi" style="margin-top:4px">Trừ quỹ nghỉ bù OT sắp hết hạn trước, rồi phép năm. Thiếu quỹ → phần thiếu tính không lương.</div>
+      <label>Từ ngày</label><input type="date" id="dTu" onchange="doiNgay()">
+      <label>Đến ngày</label><input type="date" id="dDen" onchange="doiNgay()">
+      <div id="khungBuoi"><label>Buổi (khi nghỉ 1 ngày)</label>
+        <select id="dBuoi"><option>Cả ngày</option><option>Buổi sáng</option><option>Buổi chiều</option></select></div>
+    </div>
+    <div id="fOt" class="an">
+      <div class="canh" style="margin:0 0 6px">Đăng ký <b>trước</b> giờ làm thêm. OT chỉ được tính khi anh Vũ duyệt và bạn có chấm Vào/Ra trong khung giờ này.</div>
+      <label>Ngày làm thêm</label><input type="date" id="oNgay">
+      <div class="hang"><div style="flex:1"><label>Từ giờ</label><input type="time" id="oTu" value="17:30"></div>
+        <div style="flex:1"><label>Đến giờ</label><input type="time" id="oDen" value="19:30"></div></div>
+      <label>Hình thức</label>
+      <select id="oHinhThuc" onchange="doiHinhThuc()">
+        <option value="Trả lương">Nhận lương làm thêm giờ (mặc định)</option>
+        <option value="Nghỉ bù">Tôi đề nghị chuyển sang nghỉ bù</option>
+      </select>
+      <div class="nho" id="oHinhThucGhi" style="margin-top:4px">Trả lương làm thêm: giờ thực tế × 150% ngày thường, × 200% Chủ nhật, × 300% ngày lễ.</div>
+      <div id="khungNghiBu" class="an" style="margin-top:8px">
+        <label style="display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:13.5px;line-height:1.45">
+          <input type="checkbox" id="oXacNhan" style="width:22px;height:22px;flex:0 0 22px;margin:1px 0 0">
+          <span>Tôi <b>tự nguyện đề nghị</b> chuyển giờ làm thêm này sang <b>nghỉ bù</b> thay cho tiền lương làm thêm giờ. Quy đổi: giờ thực tế × hệ số ÷ 8 = ngày nghỉ bù, dùng trong 3 tháng. Sau ngày làm thêm, hệ thống lập biên bản để tôi và Công ty ký.</span>
+        </label>
+      </div>
+    </div>
+    <div id="fBs" class="an">
+      <label>Ngày cần bổ sung</label><input type="date" id="bNgay">
+      <div class="hang"><div style="flex:1"><label>Giờ vào (nếu quên)</label><input type="time" id="bVao"></div>
+        <div style="flex:1"><label>Giờ ra (nếu quên)</label><input type="time" id="bRa"></div></div>
+    </div>
+    <label id="lyDoNhan">Lý do</label>
+    <textarea id="dLyDo" placeholder=""></textarea>
+    <div style="height:12px"></div>
+    <button class="nut" id="nutDon" onclick="guiDon()">GỬI ĐƠN</button>
+    <div style="height:8px"></div>
+    <button class="nut2" style="width:100%" onclick="dong('lopDon')">Đóng</button>
+  </div>
+</div>
+
+<script>
+// Bản 1.3 (07/11/2026): trang đặt ngoài Google, gọi API web app bằng fetch không kèm cookie Google
+// → không bị lỗi "Rất tiếc, không thể mở tệp" khi điện thoại đăng nhập nhiều tài khoản Google.
+var API = 'https://script.google.com/macros/s/AKfycbzGYkiGESyw8p6nS89ohH3ada1JWRYDi7YnDv9hpYGCrHakwzVzvsKvROhi1qq3jdhibA/exec';
+var TOKEN = (function () {
+  var t = '';
+  try { t = (new URLSearchParams(location.search).get('u') || '').replace(/[^A-Za-z0-9]/g, '').slice(0, 40); } catch (e) {}
+  try { if (t) localStorage.setItem('axgen_cc_u', t); else t = localStorage.getItem('axgen_cc_u') || ''; } catch (e) {}
+  return t;
+})();
+var S = null, anhData = null, viTri = null, gpsLoi = '', loaiDon = 'nghi', dangGps = false;
+
+function $(id) { return document.getElementById(id); }
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+function so(x) { return String(Math.round((x || 0) * 100) / 100).replace('.', ','); }
+function mo(id) { $(id).classList.add('mo'); }
+function dong(id) { $(id).classList.remove('mo'); }
+function bao(html, kieu) { $('thongbao').innerHTML = html ? '<div class="' + (kieu || 'ok') + '">' + html + '</div>' : ''; if (html) window.scrollTo(0, 0); }
+setInterval(function () { var d = new Date(); $('dongho').textContent = ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2) + ':' + ('0' + d.getSeconds()).slice(-2); }, 1000);
+
+function goi(ham, args, xong) {
+  fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ fn: ham, args: args }), redirect: 'follow', credentials: 'omit' })
+    .then(function (r) { if (!r.ok) throw new Error('Máy chủ trả lỗi ' + r.status); return r.json(); })
+    .then(function (kq) { xong && xong(kq); })
+    .catch(function (e) { bao('Lỗi kết nối: ' + esc(e && e.message || e) + '. Kiểm tra mạng rồi thử lại.', 'loi'); xong && xong(null); });
+}
+
+function nap() { if (!TOKEN) { $('ten').textContent = 'Thiếu link riêng'; bao('Mở đúng link chấm công riêng của bạn (ô B4 Bàn làm việc trong file việc, hoặc email anh Vũ gửi).', 'loi'); return; } goi('ccNap', [TOKEN], ve); }
+
+function ve(kq) {
+  if (!kq) return;
+  if (!kq.ok) { $('ten').textContent = 'Không mở được'; bao(esc(kq.loi), 'loi'); return; }
+  S = kq;
+  $('noidung').classList.remove('an');
+  $('ten').textContent = kq.ten;
+  $('ngay').textContent = kq.thu + ', ' + kq.homNay + (kq.leHomNay ? ' · ' + kq.leHomNay : '') + (kq.daApDung ? '' : ' · chấm thử, tính công từ ' + kq.apDung);
+  $('gioLam').textContent = 'Giờ làm: ' + kq.gioLam;
+  var n = $('nutCham');
+  n.textContent = kq.tiepTheo === 'RA' ? 'RA CA' : 'VÀO CA';
+  n.className = 'nut' + (kq.tiepTheo === 'RA' ? ' ra' : '');
+  $('luotHom').innerHTML = kq.luotHom.length ? kq.luotHom.map(function (l) {
+    return '<div class="luot"><span><b>' + l.gio + '</b> ' + l.loai + '</span><span class="nho">' + esc(l.noi) + (l.co ? ' · ⚠ ' + esc(l.co) : '') + '</span></div>';
+  }).join('') + (kq.treHom ? '<div class="nho" style="color:#B91C1C">Hôm nay đi trễ ' + kq.treHom + ' phút</div>' : '') : '<div class="nho" style="text-align:center">Hôm nay chưa chấm.</div>';
+  $('qPhep').textContent = so(kq.quy.phep); $('qBu').textContent = so(kq.quy.bu); $('qSap').textContent = so(kq.quy.sapNghi);
+  $('qHan').textContent = [kq.quy.phep ? 'Phép năm dùng đến ' + kq.quy.hanPhep : '', kq.quy.bu ? 'Nghỉ bù sớm nhất hết hạn ' + kq.quy.hanBu : '', kq.quy.choDuyet ? 'Đang chờ duyệt ' + so(kq.quy.choDuyet) + ' ngày' : ''].filter(Boolean).join(' · ');
+  var t = kq.thang;
+  $('thTen').textContent = 'Tháng ' + t.ten;
+  $('tCong').textContent = so(t.congTT); $('tHL').textContent = so(t.congHL); $('tTre').textContent = t.treLan;
+  $('tThem').innerHTML = [t.congChuan ? 'Công chuẩn tháng: ' + t.congChuan + ' ngày' : '', t.trePhut ? 'Tổng trễ ' + t.trePhut + ' phút' : '', t.veSomLan ? 'Về sớm ' + t.veSomLan + ' lần' : '', t.vang ? '<span style="color:#B91C1C">Vắng không phép ' + so(t.vang) + ' ngày</span>' : '',
+    t.thieu.length ? '<span style="color:#B91C1C">Thiếu chấm: ' + t.thieu.join(', ') + '</span>' : '', t.otLuongGio ? 'OT trả lương ' + so(t.otLuongGio) + ' giờ' : '',
+    t.otBuGio ? 'OT nghỉ bù ' + so(t.otBuGio) + ' giờ (= ' + so(t.otNgay) + ' ngày)' : '',
+    t.tamTinh ? 'Tạm tính ' + so(t.tamTinh) + ' công trước ngày áp dụng' : ''].filter(Boolean).join(' · ');
+  $('canhbao').innerHTML = (kq.canhBao || []).map(function (c) { return '<div class="canh">⚠ ' + esc(c) + '</div>'; }).join('');
+  $('dsDon').innerHTML = kq.don.length ? kq.don.map(function (d) {
+    var lop = d.trangThai === 'Duyệt' ? 'duyet' : d.trangThai === 'Không duyệt' ? 'khong' : d.trangThai === 'Hủy' ? 'huy' : 'cho';
+    return '<div class="don"><b>' + esc(d.loai) + '</b> ' + esc(d.moTa) + '<br><span class="tt ' + lop + '">' + esc(d.trangThai) + '</span> <span class="nho">' + esc(d.ma) + ' · gửi ' + esc(d.gui) + '</span>' +
+      (d.huyDuoc ? '<button class="huy" onclick="huyDon(\'' + d.ma + '\')">Hủy đơn</button>' : '') + (d.gc ? '<div class="nho">Anh Vũ: ' + esc(d.gc) + '</div>' : '') + '</div>';
+  }).join('') : 'Chưa có đơn.';
+  if (kq.thongBao) bao(esc(kq.thongBao), 'ok');
+  if (!kq.dongY) mo('lopDongY');
+}
+
+function dongY() { dong('lopDongY'); goi('ccDongY', [TOKEN], ve); }
+
+/* ---------- chấm công ---------- */
+function batDauCham() {
+  if (!S) return;
+  bao('');
+  anhData = null; viTri = null; gpsLoi = '';
+  $('chamTieuDe').textContent = S.tiepTheo === 'RA' ? 'Ra ca' : 'Vào ca';
+  $('nutGui').className = 'nut' + (S.tiepTheo === 'RA' ? ' ra' : '');
+  $('nutGui').disabled = true; $('anhXem').src = ''; $('noiLam').value = ''; $('ghiChu').value = '';
+  $('khungNgoai').classList.add('an');
+  $('viTri').textContent = 'Đang lấy vị trí…';
+  layViTri();
+  $('mayAnh').value = '';
+  $('mayAnh').click();
+}
+
+function layViTri() {
+  if (!navigator.geolocation) { gpsLoi = 'Trình duyệt không hỗ trợ định vị'; hienViTri(); return; }
+  dangGps = true;
+  navigator.geolocation.getCurrentPosition(function (p) {
+    dangGps = false; viTri = { lat: p.coords.latitude, lng: p.coords.longitude, acc: p.coords.accuracy }; hienViTri();
+  }, function (e) {
+    dangGps = false; gpsLoi = e && e.code === 1 ? 'Bạn chưa cho phép định vị' : 'Không lấy được vị trí'; hienViTri();
+  }, { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 });
+}
+
+function cachVP(a) {
+  var R = 6371000, r = Math.PI / 180, b = S.vp, dLat = (b.lat - a.lat) * r, dLng = (b.lng - a.lng) * r;
+  var x = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+  return Math.round(2 * R * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x)));
+}
+
+function hienViTri() {
+  var ngoai = true;
+  if (viTri) {
+    var c = cachVP(viTri);
+    ngoai = c > S.vp.banKinh + Math.min(viTri.acc || 0, 100);
+    $('viTri').innerHTML = ngoai ? '📍 Ngoài văn phòng – cách VP C30 ' + so(c / 1000) + ' km' : '📍 <b>Văn phòng C30</b> (' + c + ' m)';
+    if ((viTri.acc || 0) > 200) $('viTri').innerHTML += '<div class="nho">Sai số GPS ' + Math.round(viTri.acc) + ' m – ra chỗ thoáng để chính xác hơn</div>';
+  } else {
+    $('viTri').innerHTML = '<span style="color:#B91C1C">⚠ ' + esc(gpsLoi) + '</span><div class="nho">Bật Vị trí trên điện thoại và cho phép trình duyệt dùng vị trí, rồi bấm Hủy và chấm lại. Vẫn chấm được nhưng lượt này bị đánh dấu cần xem.</div>';
+  }
+  $('khungNgoai').classList.toggle('an', !ngoai);
+  kiemNut();
+}
+
+function kiemNut() { $('nutGui').disabled = !anhData || dangGps; }
+
+function coAnh(inp) {
+  var f = inp.files && inp.files[0];
+  if (!f) return;
+  mo('lopCham');
+  var rd = new FileReader();
+  rd.onload = function () {
+    var img = new Image();
+    img.onload = function () {
+      var max = 640, w = img.width, h = img.height, k = Math.min(1, max / Math.max(w, h));
+      var cv = document.createElement('canvas'); cv.width = Math.round(w * k); cv.height = Math.round(h * k);
+      cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+      anhData = cv.toDataURL('image/jpeg', 0.72);
+      $('anhXem').src = anhData; kiemNut();
+    };
+    img.onerror = function () { bao('Không đọc được ảnh, chụp lại.', 'loi'); dong('lopCham'); };
+    img.src = rd.result;
+  };
+  rd.readAsDataURL(f);
+}
+
+function guiCham() {
+  var ngoai = !$('khungNgoai').classList.contains('an');
+  if (ngoai && $('noiLam').value.trim().length < 3) { alertNhe('Ghi nơi làm việc hoặc mã khách.'); return; }
+  $('nutGui').disabled = true; $('nutGui').textContent = 'ĐANG GỬI…';
+  goi('ccCham', [TOKEN, { loai: S.tiepTheo, anh: anhData, lat: viTri && viTri.lat, lng: viTri && viTri.lng, acc: viTri && viTri.acc, gpsLoi: gpsLoi,
+    noiLam: $('noiLam').value, ghiChu: $('ghiChu').value, tb: navigator.userAgent.slice(0, 110) }], function (kq) {
+    $('nutGui').textContent = 'XÁC NHẬN';
+    dong('lopCham');
+    if (kq && !kq.ok) { bao(esc(kq.loi), 'loi'); return; }
+    ve(kq);
+  });
+}
+
+function alertNhe(s) { $('viTri').insertAdjacentHTML('afterend', '<div class="loi" id="tamLoi">' + esc(s) + '</div>'); setTimeout(function () { var x = $('tamLoi'); if (x) x.remove(); }, 3500); }
+
+/* ---------- đơn ---------- */
+function homNayIso() { var d = new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+function moDon(loai) {
+  loaiDon = loai; bao('');
+  $('fNghi').classList.toggle('an', loai !== 'nghi'); $('fOt').classList.toggle('an', loai !== 'ot'); $('fBs').classList.toggle('an', loai !== 'bs');
+  $('donTieuDe').textContent = loai === 'nghi' ? 'Xin nghỉ' : loai === 'ot' ? 'Đăng ký làm thêm (OT)' : 'Bổ sung công (quên chấm)';
+  $('lyDoNhan').textContent = loai === 'ot' ? 'Nội dung công việc (mã khách nếu có)' : 'Lý do';
+  var h = homNayIso();
+  ['dTu', 'dDen', 'oNgay', 'bNgay'].forEach(function (id) { if (!$(id).value) $(id).value = h; });
+  $('dLyDo').value = ''; $('nutDon').disabled = false; $('nutDon').textContent = 'GỬI ĐƠN';
+  $('oHinhThuc').value = 'Trả lương'; $('oXacNhan').checked = false; doiHinhThuc();
+  doiNgay(); mo('lopDon');
+}
+function doiNgay() {
+  if ($('dDen').value < $('dTu').value) $('dDen').value = $('dTu').value;
+  $('khungBuoi').classList.toggle('an', $('dTu').value !== $('dDen').value);
+}
+$('dLoai') && $('dLoai').addEventListener('change', function () {
+  var g = { 'Nghỉ phép': 'Trừ quỹ nghỉ bù OT sắp hết hạn trước, rồi phép năm. Thiếu quỹ → phần thiếu tính không lương.', 'Nghỉ không lương': 'Không trừ quỹ phép, không tính lương ngày nghỉ.',
+    'Nghỉ việc riêng có lương': 'Theo luật: bản thân kết hôn 3 ngày, con kết hôn 1 ngày, bố/mẹ/vợ/chồng/con mất 3 ngày. Gửi kèm giấy tờ cho chị Quyên.', 'Nghỉ ốm / chế độ BHXH': 'Gửi giấy nghỉ ốm hưởng BHXH cho chị Quyên.' };
+  $('dLoaiGhi').textContent = g[this.value] || '';
+});
+function doiHinhThuc() {
+  var nb = $('oHinhThuc').value === 'Nghỉ bù';
+  $('khungNghiBu').classList.toggle('an', !nb);
+  $('oHinhThucGhi').textContent = nb ? 'Nghỉ bù chỉ áp dụng khi bạn tự đề nghị – tích ô xác nhận bên dưới.' : 'Trả lương làm thêm: giờ thực tế × 150% ngày thường, × 200% Chủ nhật, × 300% ngày lễ.';
+  if (!nb) $('oXacNhan').checked = false;
+}
+function guiDon() {
+  var p;
+  if (loaiDon === 'nghi') p = { loai: $('dLoai').value, tu: $('dTu').value, den: $('dDen').value, buoi: $('dBuoi').value };
+  else if (loaiDon === 'ot') p = { loai: 'Đăng ký OT', tu: $('oNgay').value, gioTu: $('oTu').value, gioDen: $('oDen').value, hinhThuc: $('oHinhThuc').value, xacNhan: $('oXacNhan').checked };
+  else p = { loai: 'Bổ sung công', tu: $('bNgay').value, gioTu: $('bVao').value, gioDen: $('bRa').value };
+  p.lyDo = $('dLyDo').value;
+  $('nutDon').disabled = true; $('nutDon').textContent = 'ĐANG GỬI…';
+  goi('ccGuiDon', [TOKEN, p], function (kq) {
+    $('nutDon').disabled = false; $('nutDon').textContent = 'GỬI ĐƠN';
+    if (kq && !kq.ok) { $('dLyDo').insertAdjacentHTML('afterend', '<div class="loi" id="tamLoi2" style="margin-top:8px">' + esc(kq.loi) + '</div>'); setTimeout(function () { var x = $('tamLoi2'); if (x) x.remove(); }, 5000); return; }
+    dong('lopDon'); ve(kq);
+  });
+}
+function huyDon(ma) { goi('ccHuyDon', [TOKEN, ma], function (kq) { if (kq && !kq.ok) { bao(esc(kq.loi), 'loi'); return; } ve(kq); }); }
+
+nap();
+document.addEventListener('visibilitychange', function () { if (!document.hidden) nap(); });
+</script>
+</body>
+</html>

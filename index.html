@@ -62,6 +62,12 @@
   .chan { text-align:center; color:var(--nhat); font-size:11.5px; margin-top:18px; line-height:1.5; }
   a.link { color:var(--xanh); font-weight:600; text-decoration:none; }
   .huy { border:0; background:none; color:var(--do); font-size:12.5px; font-weight:600; padding:0; margin-left:6px; }
+  .nut.ci { background:#fff; color:var(--cam2); border:2px solid var(--cam2); font-size:19px; padding:15px; }
+  .chip { display:inline-block; padding:9px 12px; border:1.5px solid #cfd4d2; border-radius:20px; margin:3px 4px 3px 0; font-size:14px; background:#fff; color:var(--chu); }
+  .chip.chon { background:var(--nen); color:#fff; border-color:var(--nen); }
+  .ct { display:block; border:1.5px solid #cfd4d2; border-radius:12px; padding:10px 12px; margin-bottom:6px; font-size:14px; background:#fff; text-align:left; width:100%; }
+  .ct.chon { border-color:var(--cam2); background:#FFF4E5; }
+  .ct b { color:var(--nen); }
 </style>
 </head>
 <body>
@@ -86,6 +92,11 @@
       <button class="nut" id="nutCham" onclick="batDauCham()">VÀO CA</button>
       <div class="nho" style="text-align:center;margin-top:8px" id="gioLam"></div>
       <div id="luotHom" style="margin-top:8px"></div>
+    </div>
+    <div class="the an" id="theCi">
+      <button class="nut ci" onclick="moCi()">📍 CHECK-IN CÔNG TRÌNH</button>
+      <div class="nho" style="text-align:center;margin-top:6px">Bấm ngay khi tới công trình – km, hỗ trợ công trường tính từ lượt check-in.</div>
+      <div id="ciHom" style="margin-top:8px"></div>
     </div>
     <div class="the">
       <h3>Quỹ nghỉ của bạn</h3>
@@ -114,7 +125,7 @@
       <h3>Đơn của bạn</h3>
       <div id="dsDon" class="nho">Chưa có đơn.</div>
     </div>
-    <div class="chan">Giờ chấm lấy theo máy chủ Google, không theo đồng hồ điện thoại.<br>Ảnh và vị trí chỉ dùng xác nhận chấm công · chỉ Giám đốc và chị Quyên xem.<br><a href="huong-dan.html" style="color:#E8820C;font-weight:600">Xem hướng dẫn sử dụng</a><br>Cần hỗ trợ: anh Vũ 0902 974 696 · bản 1.4</div>
+    <div class="chan">Giờ chấm lấy theo máy chủ Google, không theo đồng hồ điện thoại.<br>Ảnh và vị trí chỉ dùng xác nhận chấm công · chỉ Giám đốc và chị Quyên xem.<br><a href="huong-dan.html" style="color:#E8820C;font-weight:600">Xem hướng dẫn sử dụng</a><br>Cần hỗ trợ: anh Vũ 0902 974 696 · bản 1.5</div>
   </div>
 </main>
 
@@ -146,6 +157,30 @@
     <button class="nut" id="nutGui" onclick="guiCham()" disabled>XÁC NHẬN</button>
     <div style="height:8px"></div>
     <button class="nut2" style="width:100%" onclick="dong('lopCham')">Hủy</button>
+  </div>
+</div>
+
+<!-- Check-in công trình (bản 1.5) -->
+<div class="lop" id="lopCi">
+  <div class="hop">
+    <h2>Check-in công trình</h2>
+    <div class="vitri" id="ciViTri">Đang lấy vị trí…</div>
+    <label>Công trình</label>
+    <div id="ciDs"></div>
+    <input id="ciMa" placeholder="Hoặc gõ mã: AXG-2611-0020" autocapitalize="characters" oninput="goMa()">
+    <label style="display:flex;gap:8px;align-items:center;font-weight:400;font-size:13px;margin-top:6px"><input type="checkbox" id="ciKhongMa" style="width:20px;height:20px;flex:0 0 20px" onchange="kiemCi()"> Điểm đến không có mã (kho, nhà cung cấp…) – ghi rõ ở Ghi chú</label>
+    <label>Việc</label>
+    <select id="ciViec" onchange="kiemCi()"></select>
+    <label>Phương tiện đến điểm này</label>
+    <div id="ciPt"></div>
+    <label>Đi cùng ai</label>
+    <div id="ciCung"></div>
+    <label>Ghi chú (không bắt buộc)</label>
+    <input id="ciGc" placeholder="" oninput="kiemCi()">
+    <div style="height:12px"></div>
+    <button class="nut" id="nutCi" onclick="guiCi()" disabled>XÁC NHẬN CHECK-IN</button>
+    <div style="height:8px"></div>
+    <button class="nut2" style="width:100%" onclick="dong('lopCi')">Hủy</button>
   </div>
 </div>
 
@@ -259,6 +294,7 @@ function ve(kq) {
   }).join('') : 'Chưa có đơn.';
   if (kq.thongBao) bao(esc(kq.thongBao), 'ok');
   if (!kq.dongY) mo('lopDongY');
+  napCi();
 }
 
 function dongY() { dong('lopDongY'); goi('ccDongY', [TOKEN], ve); }
@@ -387,6 +423,99 @@ function guiDon() {
   });
 }
 function huyDon(ma) { goi('ccHuyDon', [TOKEN, ma], function (kq) { if (kq && !kq.ok) { bao(esc(kq.loi), 'loi'); return; } ve(kq); }); }
+
+/* ---------- check-in công trình (bản 1.5 – 09/11/2026) ---------- */
+var CI = null, ciVt = null, ciGpsLoi = '', ciDangGps = false, ciPt = '', ciCung = [], ciChon = null, ciDangNap = false;
+function hienCi() { return S && ['KT', 'BGĐ'].indexOf(S.boPhan) >= 0; }
+function napCi() {
+  if (!hienCi()) { $('theCi').classList.add('an'); return; }
+  $('theCi').classList.remove('an');
+  if (ciDangNap) return;
+  ciDangNap = true;
+  goi('ccCiDs', [TOKEN], function (kq) { ciDangNap = false; veCi(kq); });
+}
+function veCi(kq) {
+  if (!kq) return;
+  if (!kq.ok) { $('ciHom').innerHTML = '<div class="loi">' + esc(kq.loi) + '</div>'; return; }
+  CI = kq;
+  $('ciHom').innerHTML = kq.hom.length ? kq.hom.map(function (x) {
+    return '<div class="luot"><span' + (x.huy ? ' style="text-decoration:line-through;color:#9ca3af"' : '') + '><b>' + x.gio + '</b> ' + esc(x.ma) + ' · ' + esc(x.viec) + '</span><span class="nho">' +
+      (x.huy ? 'đã hủy' : esc(x.pt) + (x.co ? ' · ⚠ ' + esc(x.co) : '') + (x.huyDuoc ? '<button class="huy" onclick="huyCi(\'' + x.maCi + '\')">Hủy</button>' : '')) + '</span></div>';
+  }).join('') : '<div class="nho" style="text-align:center">Hôm nay chưa check-in công trình nào.</div>';
+  if (kq.thongBao) bao(esc(kq.thongBao), 'ok');
+}
+function moCi() {
+  if (!CI) { bao('Đang tải danh sách công trình, bấm lại sau vài giây.', 'canh'); napCi(); return; }
+  bao('');
+  ciVt = null; ciGpsLoi = ''; ciPt = ''; ciCung = ['Không ai']; ciChon = null;
+  $('ciMa').value = ''; $('ciKhongMa').checked = false; $('ciGc').value = '';
+  $('ciDs').innerHTML = CI.goiY.length ? CI.goiY.map(function (g, i) {
+    return '<button class="ct" id="ct' + i + '" onclick="chonCt(' + i + ')"><b>' + esc(g.ma) + '</b>' + (g.viec ? ' · ' + esc(g.viec) : '') + '<div class="nho">' + esc(g.ten) + '</div></button>';
+  }).join('') : '<div class="nho" style="margin-bottom:6px">Không có việc nào hôm nay trong file việc – gõ mã công trình bên dưới.</div>';
+  $('ciViec').innerHTML = '<option value="">– Chọn việc –</option>' + CI.viec.map(function (v) { return '<option>' + esc(v) + '</option>'; }).join('');
+  veChip();
+  $('ciViTri').textContent = 'Đang lấy vị trí…';
+  layViTriCi();
+  kiemCi();
+  mo('lopCi');
+}
+function chonCt(i) {
+  ciChon = CI.goiY[i];
+  CI.goiY.forEach(function (g, j) { var b = $('ct' + j); if (b) b.classList.toggle('chon', j === i); });
+  $('ciMa').value = ''; $('ciKhongMa').checked = false;
+  if (ciChon.viec && !$('ciViec').value) $('ciViec').value = ciChon.viec;
+  kiemCi();
+}
+function goMa() {
+  if ($('ciMa').value.trim()) { ciChon = null; CI.goiY.forEach(function (g, j) { var b = $('ct' + j); if (b) b.classList.remove('chon'); }); }
+  kiemCi();
+}
+function veChip() {
+  $('ciPt').innerHTML = CI.pt.map(function (p, i) { return '<span class="chip' + (ciPt === p ? ' chon' : '') + '" onclick="chonPt(' + i + ')">' + esc(p) + '</span>'; }).join('');
+  $('ciCung').innerHTML = CI.cung.map(function (c, i) { return '<span class="chip' + (ciCung.indexOf(c) >= 0 ? ' chon' : '') + '" onclick="chonCung(' + i + ')">' + esc(c) + '</span>'; }).join('');
+}
+function chonPt(i) { ciPt = CI.pt[i]; veChip(); kiemCi(); }
+function chonCung(i) {
+  var c = CI.cung[i];
+  if (c === 'Không ai') ciCung = ['Không ai'];
+  else {
+    ciCung = ciCung.filter(function (x) { return x !== 'Không ai'; });
+    if (ciCung.indexOf(c) >= 0) ciCung = ciCung.filter(function (x) { return x !== c; }); else ciCung.push(c);
+    if (!ciCung.length) ciCung = ['Không ai'];
+  }
+  veChip(); kiemCi();
+}
+function maGo() { var t = $('ciMa').value.toUpperCase().replace(/\s+/g, ''); var m = t.match(/^AXG-?(\d{4})-?(\d{4})$/); return m ? 'AXG-' + m[1] + '-' + m[2] : ''; }
+function kiemCi() {
+  var coCt = !!ciChon || !!maGo() || ($('ciKhongMa').checked && $('ciGc').value.trim().length >= 5);
+  $('nutCi').disabled = !coCt || !$('ciViec').value || !ciPt || ciDangGps;
+}
+function layViTriCi() {
+  if (!navigator.geolocation) { ciGpsLoi = 'Trình duyệt không hỗ trợ định vị'; hienViTriCi(); return; }
+  ciDangGps = true;
+  navigator.geolocation.getCurrentPosition(function (p) {
+    ciDangGps = false; ciVt = { lat: p.coords.latitude, lng: p.coords.longitude, acc: p.coords.accuracy }; hienViTriCi();
+  }, function (e) {
+    ciDangGps = false; ciGpsLoi = e && e.code === 1 ? 'Bạn chưa cho phép định vị' : 'Không lấy được vị trí'; hienViTriCi();
+  }, { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 });
+}
+function hienViTriCi() {
+  if (ciVt) $('ciViTri').innerHTML = '📍 Đã lấy vị trí (sai số ' + Math.round(ciVt.acc || 0) + ' m)' + ((ciVt.acc || 0) > 200 ? '<div class="nho">Sai số lớn – ra chỗ thoáng, bấm Hủy rồi check-in lại để chính xác hơn</div>' : '');
+  else $('ciViTri').innerHTML = '<span style="color:#B91C1C">⚠ ' + esc(ciGpsLoi) + '</span><div class="nho">Bật Vị trí và cho phép trình duyệt dùng vị trí, rồi bấm Hủy và check-in lại. Vẫn gửi được nhưng lượt này bị đánh dấu chờ anh Vũ duyệt.</div>';
+  kiemCi();
+}
+function guiCi() {
+  var ma = ciChon ? ciChon.ma : maGo();
+  $('nutCi').disabled = true; $('nutCi').textContent = 'ĐANG GỬI…';
+  goi('ccCheckin', [TOKEN, { ma: ma, khongMa: !ma && $('ciKhongMa').checked, ten: ciChon ? ciChon.ten : '', viec: $('ciViec').value, pt: ciPt, cung: ciCung,
+    lat: ciVt && ciVt.lat, lng: ciVt && ciVt.lng, acc: ciVt && ciVt.acc, gpsLoi: ciGpsLoi, gc: $('ciGc').value, tb: navigator.userAgent.slice(0, 110) }], function (kq) {
+    $('nutCi').textContent = 'XÁC NHẬN CHECK-IN';
+    if (kq && !kq.ok) { kiemCi(); $('ciGc').insertAdjacentHTML('afterend', '<div class="loi" id="tamLoi3" style="margin-top:8px">' + esc(kq.loi) + '</div>'); setTimeout(function () { var x = $('tamLoi3'); if (x) x.remove(); }, 5000); return; }
+    dong('lopCi');
+    veCi(kq);
+  });
+}
+function huyCi(maCi) { goi('ccCiHuy', [TOKEN, maCi], function (kq) { if (kq && !kq.ok) { bao(esc(kq.loi), 'loi'); return; } veCi(kq); }); }
 
 nap();
 document.addEventListener('visibilitychange', function () { if (!document.hidden) nap(); });
